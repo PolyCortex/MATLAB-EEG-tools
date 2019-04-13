@@ -6,8 +6,8 @@
 2.  **PSGreadWholeNight.m** - Selects a large section of physionet EEG recording, displays its spectrogram  
 3.  **PSGanalyse.m** - Provides whole night frequency bands spectral power distributions for 30 seconds epochs
 4.  **genData.m** - Generates 30s epochs spectrogram images datasets from all sleep stages
-5.  **PSGreadMuse1.m** - Reads muse-lsl exported data 
-6.  **PSGreadMuse2.m** - Reads muse monitor exported data	
+5.  **PSGreadMuse1.m** - Reads muse-lsl (https://github.com/alexandrebarachant/muse-lsl) exported data 
+6.  **PSGreadMuse2.m** - Reads muse monitor (https://musemonitor.com/) exported data	
 
 ##  Library Description
 
