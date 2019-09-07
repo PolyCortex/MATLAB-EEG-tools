@@ -3,8 +3,8 @@ clc
 clear
 
 addpath(genpath('./subFunctions'))
-file = 'C:\Users\cnzak\Dropbox\Shared Files\GBM3100\software\SleepEEG\SC4001E0-PSG.edf'; 
-hypno = 'C:\Users\cnzak\Dropbox\Shared Files\GBM3100\software\SleepEEG\SC4001EC-Hypnogram.edf';
+file = 'SC4001E0-PSG.edf'; 
+hypno = 'SC4001EC-Hypnogram.edf';
 
 [hdr, record] = edfread(file); 
 [hdr2, record2] = edfread(hypno);
@@ -40,26 +40,60 @@ start_serial = datenum(start_dt);
 
 % load hypnogram date and time data from '.csv' files and assign to
 % variables
-stageWake = 'C:\Users\cnzak\Dropbox\Shared Files\GBM3100\software\SleepEEG\subFunctions\hypnogram\wake.csv';
-stageS1 = 'C:\Users\cnzak\Dropbox\Shared Files\GBM3100\software\SleepEEG\subFunctions\hypnogram\n1.csv';
-stageS2 = 'C:\Users\cnzak\Dropbox\Shared Files\GBM3100\software\SleepEEG\subFunctions\hypnogram\n2.csv';
-stageS3 = 'C:\Users\cnzak\Dropbox\Shared Files\GBM3100\software\SleepEEG\subFunctions\hypnogram\n3.csv';
-stageS4 = 'C:\Users\cnzak\Dropbox\Shared Files\GBM3100\software\SleepEEG\subFunctions\hypnogram\n4.csv';
-stageREM = 'C:\Users\cnzak\Dropbox\Shared Files\GBM3100\software\SleepEEG\subFunctions\hypnogram\REM.csv';
+stageWake = 'C:\Users\cnzak\Dropbox\PolyCortex\SleepEEG\subFunctions\hypnogram\wake.csv';
+stageS1 = 'C:\Users\cnzak\Dropbox\PolyCortex\SleepEEG\subFunctions\hypnogram\n1.csv';
+stageS2 = 'C:\Users\cnzak\Dropbox\PolyCortex\SleepEEG\subFunctions\hypnogram\n2.csv';
+stageS3 = 'C:\Users\cnzak\Dropbox\PolyCortex\SleepEEG\subFunctions\hypnogram\n3.csv';
+stageS4 = 'C:\Users\cnzak\Dropbox\PolyCortex\SleepEEG\subFunctions\hypnogram\n4.csv';
+stageREM = 'C:\Users\cnzak\Dropbox\PolyCortex\SleepEEG\subFunctions\hypnogram\REM.csv';
 dataWake = xlsread(stageWake);
 dataN1 = xlsread(stageS1);
 dataN2 = xlsread(stageS2);
 dataN3 = [xlsread(stageS3); xlsread(stageS4)];
 dataREM = xlsread(stageREM);
 
+%% **********DATA FOR ML ALGORITHMS IS STRUCTURED HERE 
+
 save('sleepEEG.mat','dataWake','dataN1','dataN2','dataN3', 'dataREM')
 load('sleepEEG.mat')
+
+% DATA FOR ML ALGORITHMS IS STRUCTURED HERE 
 
 [slowWave_W, delta_W, theta_W, alpha_W, beta_W] = getBands(dataWake, start_serial, record1);
 [slowWave_N1, delta_N1, theta_N1, alpha_N1, beta_N1] = getBands(dataN1, start_serial, record1);
 [slowWave_N2, delta_N2, theta_N2, alpha_N2, beta_N2] = getBands(dataN2, start_serial, record1);
 [slowWave_N3, delta_N3, theta_N3, alpha_N3, beta_N3] = getBands(dataN3, start_serial, record1);
 [slowWave_REM, delta_REM, theta_REM, alpha_REM, beta_REM] = getBands(dataREM, start_serial, record1);
+
+wake_Array = [slowWave_W delta_W theta_W alpha_W beta_W];
+N1_Array = [slowWave_N1 delta_N1 theta_N1 alpha_N1 beta_N1];
+N2_Array = [slowWave_N2 delta_N2 theta_N2 alpha_N2 beta_N2];
+N3_Array = [slowWave_N3 delta_N3 theta_N3 alpha_N3 beta_N3];
+REM_Array = [slowWave_REM delta_REM theta_REM alpha_REM beta_REM];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%% **********THIS IS WHERE BRUTE FORCE CLASSIFICATION STARTS
+
 
 %***Median Feature Vectors***
 % For a continuous probability distribution, the median is the value such 

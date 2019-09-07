@@ -3,8 +3,8 @@ clc
 clear
 
 addpath(genpath('./subFunctions'))
-file = 'C:\Users\cnzak\Dropbox\PolyCortex\software\SleepEEG BACKUP\SC4001E0-PSG.edf'; 
-hypno = 'C:\Users\cnzak\Dropbox\PolyCortex\software\SleepEEG BACKUP\SC4001EC-Hypnogram.edf';
+file = 'SC4001E0-PSG.edf'; 
+hypno = 'SC4001EC-Hypnogram.edf';
 
 [hdr, record] = edfread(file); 
 [hdr2, record2] = edfread(hypno);
@@ -137,71 +137,71 @@ if epochSec == 30
 else
     view(20,75) % whole night or other
 end
-% % SPECTROGRAM METHOD 2
-% figure; spectrogram(record1(range1:range2),flattopwin(100),10,[],100,'yaxis')
-% 
-% % the colormap
-% redColor = rgb('Salmon');
-% blueColor =  rgb('RoyalBlue');
-% Mc = 16;
-% Nc = Mc*2+1; % number of colors, uneven so there is a neutral middle
-% rgb = [blueColor;redColor];
-% cmap = [linspace(rgb(1,1),rgb(2,1),Nc)' linspace(rgb(1,2),rgb(2,2),Nc)' linspace(rgb(1,3),rgb(2,3),Nc)' ];
-% colormap(cmap);
-% view(70,65)
-% %view(-45,65)
-% % view(135,65)
+% SPECTROGRAM METHOD 2
+figure; spectrogram(record1(range1:range2),flattopwin(100),10,[],100,'yaxis')
 
-% % BANDPASS FILTER 0.5-35Hz
-% record1_sub = record1(range1:range2);
-% % MATLAB uses the convention that unit frequency is the Nyquist frequency, 
-% % defined as half the sampling frequency. The cutoff frequency parameter 
-% % for all basic filter design functions is normalized by the Nyquist 
-% % frequency. For a system with a 100 Hz sampling frequency, 0.3 Hz is 
-% % 0.3/50
-% normalizedCutFreq = 0.3/50;
-% hpFilter = fir1(400,normalizedCutFreq,'high');
-% hpFilteredSignal = filter(hpFilter,1,record1_sub);
-% % fftHpFiltered = fft(hpFilteredSignal);
-% % P2 = abs(fftHpFiltered/L);
-% % P1 = P2(1:L/2+1);
-% % P1(2:end-1) = 2*P1(2:end-1);
-% %figure, plot(f,P1);
-% normalizedLPcutFreq = 35/50;
-% lpFilter = fir1(400,normalizedLPcutFreq,'low');
-% lpFilteredSignal = filter(lpFilter,1,hpFilteredSignal);
-% fftLpFiltered = fft(lpFilteredSignal);
-% 
-% N = length(lpFilteredSignal);
-% Fs = 100; % sampling frequency
-% P3 = (1/(Fs*N)) * abs(fftLpFiltered).^2;
-% P3(2:end-1) = 2*P3(2:end-1);
-% P1 = P3(1:N/2+1); % uV
-% freq = 0:Fs/length(lpFilteredSignal):Fs/2;
-% figure; plot(freq,10*log10(P1),'b')
-% grid on
-% title('Periodogram Using FFT')
-% xlabel('Frequency (Hz)')
-% ylabel('Power/Frequency (dB/Hz)')
-% 
-% % BOUNDED LINE PLOT EXAMPLE
-% smoothdB = smooth(freq,10*log10(P1),0.1,'rloess');
-% ci = smooth(rand(size(smoothdB))*8,0.1,'rloess');
-% figure; boundedline(freq,smoothdB,ci, 'b')
-% title('Boundedline Periodogram Example')
-% 
-% % alpha band (8-12 Hz)
-% [~, alphaLimL] = min(abs(freq-8));
-% [~, alphaLimH] = min(abs(freq-12));
-% alphaAvg = mean(P1(alphaLimL:alphaLimH));
-% 
-% % theta band (3-7 Hz)
-% [~, thetaLimL] = min(abs(freq-3));
-% [~, thetaLimH] = min(abs(freq-7));
-% thetaAvg = mean(P1(thetaLimL:thetaLimH));
-% 
-% % delta band (0.5-2 Hz)
-% [~, deltaLimL] = min(abs(freq-0.5));
-% [~, deltaLimH] = min(abs(freq-2));
-% deltaAvg = mean(P1(deltaLimL:deltaLimH));
+% the colormap
+redColor = rgb('Salmon');
+blueColor =  rgb('RoyalBlue');
+Mc = 16;
+Nc = Mc*2+1; % number of colors, uneven so there is a neutral middle
+rgb = [blueColor;redColor];
+cmap = [linspace(rgb(1,1),rgb(2,1),Nc)' linspace(rgb(1,2),rgb(2,2),Nc)' linspace(rgb(1,3),rgb(2,3),Nc)' ];
+colormap(cmap);
+view(70,65)
+%view(-45,65)
+% view(135,65)
+
+% BANDPASS FILTER 0.5-35Hz
+record1_sub = record1(range1:range2);
+% MATLAB uses the convention that unit frequency is the Nyquist frequency, 
+% defined as half the sampling frequency. The cutoff frequency parameter 
+% for all basic filter design functions is normalized by the Nyquist 
+% frequency. For a system with a 100 Hz sampling frequency, 0.3 Hz is 
+% 0.3/50
+normalizedCutFreq = 0.3/50;
+hpFilter = fir1(400,normalizedCutFreq,'high');
+hpFilteredSignal = filter(hpFilter,1,record1_sub);
+% fftHpFiltered = fft(hpFilteredSignal);
+% P2 = abs(fftHpFiltered/L);
+% P1 = P2(1:L/2+1);
+% P1(2:end-1) = 2*P1(2:end-1);
+%figure, plot(f,P1);
+normalizedLPcutFreq = 35/50;
+lpFilter = fir1(400,normalizedLPcutFreq,'low');
+lpFilteredSignal = filter(lpFilter,1,hpFilteredSignal);
+fftLpFiltered = fft(lpFilteredSignal);
+
+N = length(lpFilteredSignal);
+Fs = 100; % sampling frequency
+P3 = (1/(Fs*N)) * abs(fftLpFiltered).^2;
+P3(2:end-1) = 2*P3(2:end-1);
+P1 = P3(1:N/2+1); % uV
+freq = 0:Fs/length(lpFilteredSignal):Fs/2;
+figure; plot(freq,10*log10(P1),'b')
+grid on
+title('Periodogram Using FFT')
+xlabel('Frequency (Hz)')
+ylabel('Power/Frequency (dB/Hz)')
+
+% BOUNDED LINE PLOT EXAMPLE
+smoothdB = smooth(freq,10*log10(P1),0.1,'rloess');
+ci = smooth(rand(size(smoothdB))*8,0.1,'rloess');
+figure; boundedline(freq,smoothdB,ci, 'b')
+title('Boundedline Periodogram Example')
+
+% alpha band (8-12 Hz)
+[~, alphaLimL] = min(abs(freq-8));
+[~, alphaLimH] = min(abs(freq-12));
+alphaAvg = mean(P1(alphaLimL:alphaLimH));
+
+% theta band (3-7 Hz)
+[~, thetaLimL] = min(abs(freq-3));
+[~, thetaLimH] = min(abs(freq-7));
+thetaAvg = mean(P1(thetaLimL:thetaLimH));
+
+% delta band (0.5-2 Hz)
+[~, deltaLimL] = min(abs(freq-0.5));
+[~, deltaLimH] = min(abs(freq-2));
+deltaAvg = mean(P1(deltaLimL:deltaLimH));
 

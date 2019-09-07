@@ -3,8 +3,8 @@ clc
 clear
 
 addpath(genpath('./subFunctions'))
-file = 'C:\Users\cnzak\Dropbox\PolyCortex\software\SleepEEG BACKUP\SC4001E0-PSG.edf'; 
-hypno = 'C:\Users\cnzak\Dropbox\PolyCortex\software\SleepEEG BACKUP\SC4001EC-Hypnogram.edf';
+file = 'C:\Users\cnzak\Dropbox\PolyCortex\SleepEEG\SC4001E0-PSG.edf'; 
+hypno = 'C:\Users\cnzak\Dropbox\PolyCortex\SleepEEG\SC4001EC-Hypnogram.edf';
 
 [hdr, record] = edfread(file); 
 [hdr2, record2] = edfread(hypno);
