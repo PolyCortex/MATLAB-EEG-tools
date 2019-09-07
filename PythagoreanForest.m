@@ -40,12 +40,12 @@ start_serial = datenum(start_dt);
 
 % load hypnogram date and time data from '.csv' files and assign to
 % variables
-stageWake = 'C:\Users\cnzak\Dropbox\PolyCortex\SleepEEG\subFunctions\hypnogram\wake.csv';
-stageS1 = 'C:\Users\cnzak\Dropbox\PolyCortex\SleepEEG\subFunctions\hypnogram\n1.csv';
-stageS2 = 'C:\Users\cnzak\Dropbox\PolyCortex\SleepEEG\subFunctions\hypnogram\n2.csv';
-stageS3 = 'C:\Users\cnzak\Dropbox\PolyCortex\SleepEEG\subFunctions\hypnogram\n3.csv';
-stageS4 = 'C:\Users\cnzak\Dropbox\PolyCortex\SleepEEG\subFunctions\hypnogram\n4.csv';
-stageREM = 'C:\Users\cnzak\Dropbox\PolyCortex\SleepEEG\subFunctions\hypnogram\REM.csv';
+stageWake = 'C:\Users\cnzak\Dropbox\PolyCortex\PythagoreanForest\subFunctions\hypnogram\wake.csv';
+stageS1 = 'C:\Users\cnzak\Dropbox\PolyCortex\PythagoreanForest\subFunctions\hypnogram\n1.csv';
+stageS2 = 'C:\Users\cnzak\Dropbox\PolyCortex\PythagoreanForest\subFunctions\hypnogram\n2.csv';
+stageS3 = 'C:\Users\cnzak\Dropbox\PolyCortex\PythagoreanForest\subFunctions\hypnogram\n3.csv';
+stageS4 = 'C:\Users\cnzak\Dropbox\PolyCortex\PythagoreanForest\subFunctions\hypnogram\n4.csv';
+stageREM = 'C:\Users\cnzak\Dropbox\PolyCortex\PythagoreanForest\subFunctions\hypnogram\REM.csv';
 dataWake = xlsread(stageWake);
 dataN1 = xlsread(stageS1);
 dataN2 = xlsread(stageS2);
