@@ -120,8 +120,8 @@ treesCount = 60;
 
 [BaggedEnsemble, nodeLevels, nodeAngles, nodeProp, nodeParents] = generic_random_forests(X,Y,treesCount,'classification');
 
-n = max(nodeLevels);
-M = randomPythagor_tree(n, nodeLevels, nodeAngles, nodeParents, 'cool');
+% n = max(nodeLevels);
+% M = randomPythagor_tree(n, nodeLevels, nodeAngles, nodeParents, 'cool');
 
 % % function 'predict(Mdl,X)' returns a vector of predicted class labels for 
 % % the predictor data in the table or matrix 'X', based on the trained 
