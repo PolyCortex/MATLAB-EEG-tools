@@ -118,7 +118,7 @@ Y = training_Labels;
 % as a function X
 treesCount = 60;
 
-[BaggedEnsemble, nodeLevels, nodeAngles, nodeProp, nodeParents] = generic_random_forests(X,Y,treesCount,'classification');
+% [BaggedEnsemble, nodeLevels, nodeAngles, nodeProp, nodeParents] = generic_random_forests(X,Y,treesCount,'classification');
 
 % n = max(nodeLevels);
 % M = randomPythagor_tree(n, nodeLevels, nodeAngles, nodeParents, 'cool');
@@ -132,17 +132,17 @@ treesCount = 60;
 % predict(BaggedEnsemble, N3_Array(67,:))
 % predict(BaggedEnsemble, REM_Array(55,:))
 
-imp = BaggedEnsemble.OOBPermutedPredictorDeltaError;
-
-figure;
-bar(imp);
-title('Curvature Test');
-ylabel('Predictor importance estimates');
-xlabel('Predictors');
-h = gca;
-h.XTickLabel = BaggedEnsemble.PredictorNames;
-h.XTickLabelRotation = 45;
-h.TickLabelInterpreter = 'none';
+% imp = BaggedEnsemble.OOBPermutedPredictorDeltaError;
+% 
+% figure;
+% bar(imp);
+% title('Curvature Test');
+% ylabel('Predictor importance estimates');
+% xlabel('Predictors');
+% h = gca;
+% h.XTickLabel = BaggedEnsemble.PredictorNames;
+% h.XTickLabelRotation = 45;
+% h.TickLabelInterpreter = 'none';
 
 % Out-of-bag (OOB) is the mean prediction error on each training sample, 
 % xi, using only the trees that did not have xi in their bootstrap sample.
